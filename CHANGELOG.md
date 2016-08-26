@@ -14,7 +14,8 @@ We refer to [GitHub issues](https://github.com/JabRef/jabref/issues) by using `#
 ### Changed
 
 ### Fixed
-- Fixed NullPointerException when opening search result window for an untitled database 
+- Fixed[#1663](https://github.com/JabRef/jabref/issues/1663): Better multi-monitor support
+- Fixed NullPointerException when opening search result window for an untitled database
 
 ### Removed
 
