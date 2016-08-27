@@ -49,12 +49,13 @@ public abstract class AbstractGroup implements SearchMatcher {
      * @throws ParseException If an error occurred and a group could not be created,
      *                        e.g. due to a malformed regular expression.
      */
-    public static AbstractGroup fromString(String s, String keywordSeparator) throws ParseException {
+    public static AbstractGroup fromString(String s, String keywordSeparator, String allEntriesName)
+            throws ParseException {
         if (s.startsWith(KeywordGroup.ID)) {
             return KeywordGroup.fromString(s, keywordSeparator);
         }
         if (s.startsWith(AllEntriesGroup.ID)) {
-            return AllEntriesGroup.fromString(s);
+            return AllEntriesGroup.fromString(s, allEntriesName);
         }
         if (s.startsWith(SearchGroup.ID)) {
             return SearchGroup.fromString(s);
@@ -182,20 +183,9 @@ public abstract class AbstractGroup implements SearchMatcher {
     }
 
     /**
-     * Returns a lengthy textual description of this instance (for
-     * the groups editor). The text is formatted in HTML.
-     */
-    public abstract String getDescription();
-
-    /**
      * @return A deep copy of this object.
      */
     public abstract AbstractGroup deepCopy();
-
-    /**
-     * Returns a short description of the group in HTML (for a tooltip).
-     */
-    public abstract String getShortDescription(boolean showDynamic);
 
     // by general AbstractGroup contract, toString() must return
     // something from which this object can be reconstructed

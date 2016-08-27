@@ -10,7 +10,7 @@ public class AllEntriesGroupTest {
 
     @Test
     public void testToString() {
-        assertEquals("AllEntriesGroup:", new AllEntriesGroup().toString());
+        assertEquals("AllEntriesGroup:", new AllEntriesGroup("").toString());
     }
 
 }

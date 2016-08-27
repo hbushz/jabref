@@ -6,7 +6,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
 
-import net.sf.jabref.logic.groups.GroupDescriptions;
 import net.sf.jabref.model.ParseException;
 import net.sf.jabref.model.entry.FieldName;
 import net.sf.jabref.model.util.ModelStringUtil;
@@ -117,16 +116,6 @@ public class ExplicitGroup extends KeywordGroup {
      */
     public void clearLegacyEntryKeys() {
         legacyEntryKeys.clear();
-    }
-
-    @Override
-    public String getDescription() {
-        return GroupDescriptions.getDescriptionForPreview();
-    }
-
-    @Override
-    public String getShortDescription(boolean showDynamic) {
-        return GroupDescriptions.getShortDescription(this, showDynamic);
     }
 
     public List<String> getLegacyEntryKeys() {

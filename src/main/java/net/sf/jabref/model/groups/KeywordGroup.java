@@ -7,8 +7,6 @@ import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
-import net.sf.jabref.logic.groups.GroupDescriptions;
-import net.sf.jabref.logic.l10n.Localization;
 import net.sf.jabref.model.EntriesGroupChange;
 import net.sf.jabref.model.FieldChange;
 import net.sf.jabref.model.ParseException;
@@ -60,7 +58,7 @@ public class KeywordGroup extends AbstractGroup {
             pattern = caseSensitive ? Pattern.compile("\\b" + searchExpression + "\\b") : Pattern.compile(
                     "\\b" + searchExpression + "\\b", Pattern.CASE_INSENSITIVE);
         } catch (PatternSyntaxException exception) {
-            throw new ParseException(Localization.lang("Syntax error in regular-expression pattern", searchExpression));
+            throw new ParseException("Syntax error in regular-expression pattern: " + searchExpression);
         }
     }
 
@@ -319,16 +317,6 @@ public class KeywordGroup extends AbstractGroup {
     @Override
     public boolean isDynamic() {
         return true;
-    }
-
-    @Override
-    public String getDescription() {
-        return GroupDescriptions.getDescriptionForPreview(this);
-    }
-
-    @Override
-    public String getShortDescription(boolean showDynamic) {
-        return GroupDescriptions.getShortDescription(this, showDynamic);
     }
 
     @Override

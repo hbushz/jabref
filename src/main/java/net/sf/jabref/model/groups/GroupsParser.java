@@ -2,7 +2,6 @@ package net.sf.jabref.model.groups;
 
 import java.util.List;
 
-import net.sf.jabref.logic.l10n.Localization;
 import net.sf.jabref.model.ParseException;
 
 /**
@@ -10,7 +9,7 @@ import net.sf.jabref.model.ParseException;
  */
 public class GroupsParser {
 
-    public static GroupTreeNode importGroups(List<String> orderedData, String keywordSeparator)
+    public static GroupTreeNode importGroups(List<String> orderedData, String keywordSeparator, String allEntriesName)
             throws ParseException {
         GroupTreeNode cursor = null;
         GroupTreeNode root = null;
@@ -23,10 +22,11 @@ public class GroupsParser {
 
             int spaceIndex = string.indexOf(' ');
             if (spaceIndex <= 0) {
-                throw new ParseException(Localization.lang("Expected \"%0\" to contain whitespace", string));
+                throw new ParseException("Expected \"" + string + "\" to contain whitespace");
             }
             int level = Integer.parseInt(string.substring(0, spaceIndex));
-            AbstractGroup group = AbstractGroup.fromString(string.substring(spaceIndex + 1), keywordSeparator);
+            AbstractGroup group = AbstractGroup.fromString(string.substring(spaceIndex + 1), keywordSeparator,
+                    allEntriesName);
             GroupTreeNode newNode = GroupTreeNode.fromGroup(group);
             if (cursor == null) {
                 // create new root

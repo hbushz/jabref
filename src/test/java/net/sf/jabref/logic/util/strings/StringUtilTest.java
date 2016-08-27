@@ -51,8 +51,8 @@ public class StringUtilTest {
 
     @Test
     public void testQuoteForHTML() {
-        assertEquals("&#33;", ModelStringUtil.quoteForHTML("!"));
-        assertEquals("&#33;&#33;&#33;", ModelStringUtil.quoteForHTML("!!!"));
+        assertEquals("&#33;", StringUtil.quoteForHTML("!"));
+        assertEquals("&#33;&#33;&#33;", StringUtil.quoteForHTML("!!!"));
     }
 
     @Test

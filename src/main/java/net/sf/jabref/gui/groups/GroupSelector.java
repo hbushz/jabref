@@ -343,7 +343,7 @@ public class GroupSelector extends SidePaneComponent implements TreeSelectionLis
                 KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, KeyEvent.CTRL_MASK));
 
 
-        setGroups(GroupTreeNode.fromGroup(new AllEntriesGroup()));
+        setGroups(GroupTreeNode.fromGroup(new AllEntriesGroup(Localization.lang("All entries"))));
     }
 
     private void definePopup() {
@@ -1219,7 +1219,8 @@ public class GroupSelector extends SidePaneComponent implements TreeSelectionLis
         if (metaData.getGroups().isPresent()) {
             setGroups(metaData.getGroups().get());
         } else {
-            GroupTreeNode newGroupsRoot = GroupTreeNode.fromGroup(new AllEntriesGroup());
+            GroupTreeNode newGroupsRoot = GroupTreeNode
+                    .fromGroup(new AllEntriesGroup(Localization.lang("All entries")));
             metaData.setGroups(newGroupsRoot);
             setGroups(newGroupsRoot);
         }

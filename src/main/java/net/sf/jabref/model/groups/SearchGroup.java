@@ -3,7 +3,6 @@ package net.sf.jabref.model.groups;
 import java.util.List;
 import java.util.Optional;
 
-import net.sf.jabref.logic.groups.GroupDescriptions;
 import net.sf.jabref.model.search.GroupSearchQuery;
 import net.sf.jabref.model.search.rules.SearchRule;
 import net.sf.jabref.model.EntriesGroupChange;
@@ -157,16 +156,6 @@ public class SearchGroup extends AbstractGroup {
     @Override
     public boolean isDynamic() {
         return true;
-    }
-
-    @Override
-    public String getDescription() {
-        return GroupDescriptions.getDescriptionSearchGroup(this);
-    }
-
-    @Override
-    public String getShortDescription(boolean showDynamic) {
-        return GroupDescriptions.getShortDescription(this, showDynamic);
     }
 
     @Override

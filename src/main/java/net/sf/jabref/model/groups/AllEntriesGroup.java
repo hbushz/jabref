@@ -3,8 +3,6 @@ package net.sf.jabref.model.groups;
 import java.util.List;
 import java.util.Optional;
 
-import net.sf.jabref.logic.groups.GroupDescriptions;
-import net.sf.jabref.logic.l10n.Localization;
 import net.sf.jabref.model.EntriesGroupChange;
 import net.sf.jabref.model.entry.BibEntry;
 
@@ -15,15 +13,16 @@ public class AllEntriesGroup extends AbstractGroup {
 
     public static final String ID = "AllEntriesGroup:";
 
-    public AllEntriesGroup() {
-        super(Localization.lang("All entries"), GroupHierarchyType.INDEPENDENT);
+
+    public AllEntriesGroup(String name) {
+        super(name, GroupHierarchyType.INDEPENDENT);
     }
 
-    public static AbstractGroup fromString(String s) {
+    public static AbstractGroup fromString(String s, String name) {
         if (!s.startsWith(AllEntriesGroup.ID)) {
             throw new IllegalArgumentException("AllEntriesGroup cannot be created from \"" + s + "\".");
         }
-        return new AllEntriesGroup();
+        return new AllEntriesGroup(name);
     }
 
     @Override
@@ -50,7 +49,7 @@ public class AllEntriesGroup extends AbstractGroup {
 
     @Override
     public AbstractGroup deepCopy() {
-        return new AllEntriesGroup();
+        return new AllEntriesGroup(getName());
     }
 
     @Override
@@ -72,16 +71,6 @@ public class AllEntriesGroup extends AbstractGroup {
     public boolean isDynamic() {
         // this is actually a special case; I define it as non-dynamic
         return false;
-    }
-
-    @Override
-    public String getDescription() {
-        return GroupDescriptions.getDescriptionAllEntriesGroup();
-    }
-
-    @Override
-    public String getShortDescription(boolean showDynamic) {
-        return GroupDescriptions.getShortDescriptionAllEntriesGroup();
     }
 
     @Override

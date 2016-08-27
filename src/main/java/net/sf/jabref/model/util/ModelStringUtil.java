@@ -31,18 +31,6 @@ public class ModelStringUtil {
         return result.toString();
     }
 
-    /**
-     * Quotes each and every character, e.g. '!' as &#33;. Used for verbatim
-     * display of arbitrary strings that may contain HTML entities.
-     */
-    public static String quoteForHTML(String toQuote) {
-        StringBuilder result = new StringBuilder();
-        for (int i = 0; i < toQuote.length(); ++i) {
-            result.append("&#").append((int) toQuote.charAt(i)).append(';');
-        }
-        return result.toString();
-    }
-
     public static String booleanToBinaryString(boolean expression) {
         return expression ? "1" : "0";
     }

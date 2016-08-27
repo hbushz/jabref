@@ -1,19 +1,18 @@
 package net.sf.jabref.logic.groups;
 
 import net.sf.jabref.logic.l10n.Localization;
-import net.sf.jabref.logic.search.rules.describer.SearchDescribers;
+import net.sf.jabref.logic.util.strings.StringUtil;
 import net.sf.jabref.model.groups.ExplicitGroup;
 import net.sf.jabref.model.groups.KeywordGroup;
 import net.sf.jabref.model.groups.SearchGroup;
-import net.sf.jabref.model.util.ModelStringUtil;
 
 public class GroupDescriptions {
 
     public static String getDescriptionForPreview(String field, String expr, boolean caseSensitive, boolean regExp) {
         String header = regExp ? Localization.lang("This group contains entries whose <b>%0</b> field contains the regular expression <b>%1</b>",
-                field, ModelStringUtil.quoteForHTML(expr))
+                field, StringUtil.quoteForHTML(expr))
                 : Localization.lang("This group contains entries whose <b>%0</b> field contains the keyword <b>%1</b>",
-                field, ModelStringUtil.quoteForHTML(expr));
+                field, StringUtil.quoteForHTML(expr));
         String caseSensitiveText = caseSensitive ? Localization.lang("case sensitive") :
             Localization.lang("case insensitive");
         String footer = regExp ?
@@ -28,22 +27,17 @@ public class GroupDescriptions {
                         + "then using the context menu. "
                         + "This process removes the term <b>%1</b> from "
                         + "each entry's <b>%0</b> field.",
-                field, ModelStringUtil.quoteForHTML(expr));
+                field, StringUtil.quoteForHTML(expr));
         return String.format("%s (%s). %s", header, caseSensitiveText, footer);
     }
 
-    public static String getDescriptionForPreview(KeywordGroup keywordGroup) {
-        return getDescriptionForPreview(keywordGroup.getSearchField(), keywordGroup.getSearchExpression(),
-                keywordGroup.isCaseSensitive(), keywordGroup.isRegExp());
-    }
-
-    public static String getShortDescription(KeywordGroup keywordGroup, boolean showDynamic) {
+    public static String getShortDescriptionKeywordGroup(KeywordGroup keywordGroup, boolean showDynamic) {
         StringBuilder sb = new StringBuilder();
         sb.append("<b>");
         if (showDynamic) {
-            sb.append("<i>").append(ModelStringUtil.quoteForHTML(keywordGroup.getName())).append("</i>");
+            sb.append("<i>").append(StringUtil.quoteForHTML(keywordGroup.getName())).append("</i>");
         } else {
-            sb.append(ModelStringUtil.quoteForHTML(keywordGroup.getName()));
+            sb.append(StringUtil.quoteForHTML(keywordGroup.getName()));
         }
         sb.append("</b> - ");
         sb.append(Localization.lang("dynamic group"));
@@ -52,7 +46,7 @@ public class GroupDescriptions {
         sb.append("</b> ");
         sb.append(Localization.lang("contains"));
         sb.append(" <b>");
-        sb.append(ModelStringUtil.quoteForHTML(keywordGroup.getSearchExpression()));
+        sb.append(StringUtil.quoteForHTML(keywordGroup.getSearchExpression()));
         sb.append("</b>)");
         switch (keywordGroup.getHierarchicalContext()) {
         case INCLUDING:
@@ -76,7 +70,7 @@ public class GroupDescriptions {
                 + "then using the context menu.");
     }
 
-    public static String getShortDescription(ExplicitGroup explicitGroup, boolean showDynamic) {
+    public static String getShortDescriptionExplicitGroup(ExplicitGroup explicitGroup) {
         StringBuilder sb = new StringBuilder();
         sb.append("<b>").append(explicitGroup.getName()).append("</b> - ").append(Localization.lang("static group"));
         switch (explicitGroup.getHierarchicalContext()) {
@@ -96,24 +90,20 @@ public class GroupDescriptions {
         return Localization.lang("<b>All Entries</b> (this group cannot be edited or removed)");
     }
 
-    public static String getDescriptionAllEntriesGroup() {
-        return Localization.lang("This group contains all entries. It cannot be edited or removed.");
-    }
-
     public static String getShortDescription(SearchGroup searchGroup, boolean showDynamic) {
 
         StringBuilder sb = new StringBuilder();
         sb.append("<b>");
         if (showDynamic) {
-            sb.append("<i>").append(ModelStringUtil.quoteForHTML(searchGroup.getName())).append("</i>");
+            sb.append("<i>").append(StringUtil.quoteForHTML(searchGroup.getName())).append("</i>");
         } else {
-            sb.append(ModelStringUtil.quoteForHTML(searchGroup.getName()));
+            sb.append(StringUtil.quoteForHTML(searchGroup.getName()));
         }
         sb.append("</b> - ");
         sb.append(Localization.lang("dynamic group"));
         sb.append(" (");
         sb.append(Localization.lang("search expression"));
-        sb.append(" <b>").append(ModelStringUtil.quoteForHTML(searchGroup.getSearchExpression())).append("</b>)");
+        sb.append(" <b>").append(StringUtil.quoteForHTML(searchGroup.getSearchExpression())).append("</b>)");
         switch (searchGroup.getHierarchicalContext()) {
         case INCLUDING:
             sb.append(", ").append(Localization.lang("includes subgroups"));
@@ -127,8 +117,4 @@ public class GroupDescriptions {
         return sb.toString();
     }
 
-    public static String getDescriptionSearchGroup(SearchGroup searchGroup) {
-        return SearchDescribers.getSearchDescriberFor(searchGroup.getSearchRule(), searchGroup.getSearchExpression())
-                .getDescription();
-    }
 }

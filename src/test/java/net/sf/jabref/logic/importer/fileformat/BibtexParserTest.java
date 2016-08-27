@@ -1494,7 +1494,7 @@ public class BibtexParserTest {
 
         GroupTreeNode root = result.getMetaData().getGroups().get();
 
-        assertEquals(new AllEntriesGroup(), root.getGroup());
+        assertEquals(new AllEntriesGroup(""), root.getGroup());
         assertEquals(3, root.getNumberOfChildren());
         assertEquals(
                 new KeywordGroup("Fréchet", "keywords", "FrechetSpace", false, true, GroupHierarchyType.INDEPENDENT,

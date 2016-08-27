@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import net.sf.jabref.logic.l10n.Localization;
 import net.sf.jabref.model.ParseException;
 import net.sf.jabref.model.entry.BibEntry;
 import net.sf.jabref.model.groups.AbstractGroup;
@@ -142,7 +143,7 @@ public class GroupTreeNodeTest {
     }
     */
     private GroupTreeNode getRoot() {
-        return GroupTreeNode.fromGroup(new AllEntriesGroup());
+        return GroupTreeNode.fromGroup(new AllEntriesGroup(Localization.lang("All entries")));
     }
 
     @Test

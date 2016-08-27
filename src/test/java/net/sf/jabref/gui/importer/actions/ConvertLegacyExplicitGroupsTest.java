@@ -60,7 +60,7 @@ public class ConvertLegacyExplicitGroupsTest {
 
     @Test
     public void performActionWritesGroupMembershipInEntryForComplexGroupTree() throws Exception {
-        GroupTreeNode root = GroupTreeNode.fromGroup(new AllEntriesGroup());
+        GroupTreeNode root = GroupTreeNode.fromGroup(new AllEntriesGroup(""));
         root.addSubgroup(new ExplicitGroup("TestGroup2", GroupHierarchyType.INCLUDING,
                 JabRefPreferences.getInstance().get(JabRefPreferences.KEYWORD_SEPARATOR)));
         root.addSubgroup(group);

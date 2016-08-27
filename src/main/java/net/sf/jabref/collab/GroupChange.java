@@ -34,7 +34,7 @@ class GroupChange extends Change {
         root.removeAllChildren();
         if (changedGroups == null) {
             // I think setting root to null is not possible
-            root.setGroup(new AllEntriesGroup());
+            root.setGroup(new AllEntriesGroup(Localization.lang("All entries")));
         } else {
             // change root group, even though it'll be AllEntries anyway
             root.setGroup(changedGroups.getGroup());

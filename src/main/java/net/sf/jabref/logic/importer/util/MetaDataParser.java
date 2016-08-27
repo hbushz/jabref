@@ -24,12 +24,12 @@ public class MetaDataParser {
 
     public static MetaData parse(Map<String, String> data, String keywordSeparator) throws ParseException {
         MetaData metaData = new MetaData();
-        metaData.setParsedData(getParsedData(data, keywordSeparator, metaData));
+        metaData.setParsedData(getParsedData(data, keywordSeparator, metaData, Localization.lang("All entries")));
         return metaData;
     }
 
     public static Map<String, List<String>> getParsedData(Map<String, String> inData, String keywordSeparator,
-            MetaData metaData)
+            MetaData metaData, String allEntriesName)
             throws ParseException {
         final Map<String, List<String>> newMetaData = new HashMap<>();
         for (Map.Entry<String, String> entry : inData.entrySet()) {
@@ -46,7 +46,7 @@ public class MetaDataParser {
             }
             if (MetaData.GROUPSTREE.equals(entry.getKey())) {
                 try {
-                metaData.setGroups(GroupTreeNode.parse(orderedData, keywordSeparator));
+                    metaData.setGroups(GroupTreeNode.parse(orderedData, keywordSeparator, allEntriesName));
                 // the keys "groupsversion" and "groups" were used in JabRef versions around 1.3, we will not support them anymore
                 } catch (ParseException e) {
                     throw new ParseException(

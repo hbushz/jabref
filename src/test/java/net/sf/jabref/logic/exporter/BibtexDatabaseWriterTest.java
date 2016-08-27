@@ -185,7 +185,7 @@ public class BibtexDatabaseWriterTest {
 
     @Test
     public void writeGroups() throws Exception {
-        GroupTreeNode groupRoot = GroupTreeNode.fromGroup(new AllEntriesGroup());
+        GroupTreeNode groupRoot = GroupTreeNode.fromGroup(new AllEntriesGroup(""));
         groupRoot.addSubgroup(new ExplicitGroup("test", GroupHierarchyType.INCLUDING,
                 prefs.get(JabRefPreferences.KEYWORD_SEPARATOR)));
         metaData.setGroups(groupRoot);
@@ -205,7 +205,7 @@ public class BibtexDatabaseWriterTest {
     public void writeGroupsAndEncoding() throws Exception {
         SavePreferences preferences = new SavePreferences().withEncoding(Charsets.US_ASCII);
 
-        GroupTreeNode groupRoot = GroupTreeNode.fromGroup(new AllEntriesGroup());
+        GroupTreeNode groupRoot = GroupTreeNode.fromGroup(new AllEntriesGroup(""));
         groupRoot.addChild(GroupTreeNode.fromGroup(new ExplicitGroup("test", GroupHierarchyType.INCLUDING,
                 prefs.get(JabRefPreferences.KEYWORD_SEPARATOR))));
         metaData.setGroups(groupRoot);
