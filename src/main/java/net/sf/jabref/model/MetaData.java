@@ -1,8 +1,5 @@
-package net.sf.jabref;
+package net.sf.jabref.model;
 
-import java.io.IOException;
-import java.io.Reader;
-import java.io.StringReader;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -13,19 +10,11 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
-import java.util.TreeMap;
 import java.util.Vector;
 
 import net.sf.jabref.event.GroupUpdatedEvent;
 import net.sf.jabref.event.MetaDataChangedEvent;
-import net.sf.jabref.logic.config.SaveOrderConfig;
-import net.sf.jabref.logic.exporter.FieldFormatterCleanups;
 import net.sf.jabref.logic.groups.GroupTreeNode;
-import net.sf.jabref.logic.importer.util.ParseException;
-import net.sf.jabref.logic.l10n.Localization;
-import net.sf.jabref.logic.layout.format.FileLinkPreferences;
-import net.sf.jabref.logic.util.OS;
-import net.sf.jabref.logic.util.strings.StringUtil;
 import net.sf.jabref.model.bibtexkeypattern.AbstractBibtexKeyPattern;
 import net.sf.jabref.model.bibtexkeypattern.DatabaseBibtexKeyPattern;
 import net.sf.jabref.model.bibtexkeypattern.GlobalBibtexKeyPattern;
@@ -33,22 +22,18 @@ import net.sf.jabref.model.database.BibDatabaseMode;
 import net.sf.jabref.model.entry.FieldName;
 
 import com.google.common.eventbus.EventBus;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 public class MetaData implements Iterable<String> {
-    private static final Log LOGGER = LogFactory.getLog(MetaData.class);
-
     public static final String META_FLAG = "jabref-meta: ";
     private static final String SAVE_ORDER_CONFIG = "saveOrderConfig";
 
-    private static final String SAVE_ACTIONS = "saveActions";
+    public static final String SAVE_ACTIONS = "saveActions";
     private static final String PREFIX_KEYPATTERN = "keypattern_";
     private static final String KEYPATTERNDEFAULT = "keypatterndefault";
     private static final String DATABASE_TYPE = "databaseType";
 
-    private static final String GROUPSTREE = "groupstree";
-    private static final String FILE_DIRECTORY = FieldName.FILE + FileLinkPreferences.DIR_SUFFIX;
+    public static final String GROUPSTREE = "groupstree";
+    private static final String FILE_DIRECTORY = FieldName.FILE + FileDirectoryPreferences.DIR_SUFFIX;
     public static final String SELECTOR_META_PREFIX = "selector_";
     private static final String PROTECTED_FLAG_META = "protectedFlag";
 
@@ -66,15 +51,12 @@ public class MetaData implements Iterable<String> {
      * must simply make sure the appropriate changes are reflected in the Vector
      * it has been passed.
      */
-    private MetaData(Map<String, String> inData, String keywordSeparator) throws ParseException {
-        Objects.requireNonNull(inData);
-        setData(inData, keywordSeparator);
+    public MetaData(Map<String, List<String>> parsedData) {
+        clearMetaData();
+        metaData.putAll(parsedData);
     }
 
-    private MetaData(Map<String, String> inData, Charset encoding, String keywordSeparator) throws ParseException {
-        this(inData, keywordSeparator);
-        this.encoding = Objects.requireNonNull(encoding);
-    }
+
 
     /**
      * The MetaData object can be constructed with no data in it.
@@ -87,40 +69,12 @@ public class MetaData implements Iterable<String> {
         this.encoding = encoding;
     }
 
-    public static MetaData parse(Map<String, String> data, String keywordSeparator) throws ParseException {
-        return new MetaData(data, keywordSeparator);
-    }
 
-    public static MetaData parse(Map<String, String> data, Charset encoding, String keywordSeparator)
-            throws ParseException {
-        return new MetaData(data, encoding, keywordSeparator);
-    }
-
-    public void setData(Map<String, String> inData, String keywordSeparator) throws ParseException {
+    public void setParsedData(Map<String, List<String>> parsedMetaData) {
         clearMetaData();
-        for (Map.Entry<String, String> entry : inData.entrySet()) {
-            StringReader data = new StringReader(entry.getValue());
-            List<String> orderedData = new ArrayList<>();
-            // We must allow for ; and \ in escape sequences.
-            try {
-                Optional<String> unit;
-                while ((unit = getNextUnit(data)).isPresent()) {
-                    orderedData.add(unit.get());
-                }
-            } catch (IOException ex) {
-                LOGGER.error("Weird error while parsing meta data.", ex);
-            }
-            if (GROUPSTREE.equals(entry.getKey())) {
-                putGroups(orderedData, keywordSeparator);
-                // the keys "groupsversion" and "groups" were used in JabRef versions around 1.3, we will not support them anymore
-                eventBus.post(new GroupUpdatedEvent(this));
-            } else if (SAVE_ACTIONS.equals(entry.getKey())) {
-                metaData.put(SAVE_ACTIONS, FieldFormatterCleanups.parse(orderedData).getAsStringList()); // Without MetaDataChangedEvent
-            } else {
-                metaData.put(entry.getKey(), orderedData);
-            }
-        }
+        metaData.putAll(parsedMetaData);
     }
+
 
     public Optional<SaveOrderConfig> getSaveOrderConfig() {
         List<String> storedSaveOrderConfig = getData(SAVE_ORDER_CONFIG);
@@ -183,20 +137,6 @@ public class MetaData implements Iterable<String> {
         postChange();
     }
 
-    /**
-     * Parse the groups metadata string
-     *
-     * @param orderedData The vector of metadata strings
-     */
-    private void putGroups(List<String> orderedData, String keywordSeparator) throws ParseException {
-        try {
-            groupsRoot = GroupTreeNode.parse(orderedData, keywordSeparator);
-            eventBus.post(new GroupUpdatedEvent(this));
-        } catch (ParseException e) {
-            throw new ParseException(Localization.lang(
-                    "Group tree could not be parsed. If you save the BibTeX database, all groups will be lost."), e);
-        }
-    }
 
     public Optional<GroupTreeNode> getGroups() {
         return Optional.ofNullable(groupsRoot);
@@ -209,31 +149,6 @@ public class MetaData implements Iterable<String> {
     public void setGroups(GroupTreeNode root) {
         groupsRoot = root;
         eventBus.post(new GroupUpdatedEvent(this));
-    }
-
-    /**
-     * Reads the next unit. Units are delimited by ';'.
-     */
-    private static Optional<String> getNextUnit(Reader reader) throws IOException {
-        int c;
-        boolean escape = false;
-        StringBuilder res = new StringBuilder();
-        while ((c = reader.read()) != -1) {
-            if (escape) {
-                res.append((char) c);
-                escape = false;
-            } else if (c == '\\') {
-                escape = true;
-            } else if (c == ';') {
-                break;
-            } else {
-                res.append((char) c);
-            }
-        }
-        if (res.length() > 0) {
-            return Optional.of(res.toString());
-        }
-        return Optional.empty();
     }
 
     /**
@@ -301,12 +216,8 @@ public class MetaData implements Iterable<String> {
         this.bibtexKeyPattern = bibtexKeyPattern;
     }
 
-    public Optional<FieldFormatterCleanups> getSaveActions() {
-        if (this.getData(SAVE_ACTIONS) == null) {
-            return Optional.empty();
-        } else {
-            return Optional.of(FieldFormatterCleanups.parse(getData(SAVE_ACTIONS)));
-        }
+    public Optional<List<String>> getSaveActions() {
+        return Optional.ofNullable(getData(SAVE_ACTIONS));
     }
 
     public Optional<BibDatabaseMode> getMode() {
@@ -353,51 +264,11 @@ public class MetaData implements Iterable<String> {
         }
     }
 
-    /**
-     * Writes all data in the format <key, serialized data>.
-     */
-    public Map<String, String> getAsStringMap() {
-
-        Map<String, String> serializedMetaData = new TreeMap<>();
-
-        // first write all meta data except groups
-        for (Map.Entry<String, List<String>> metaItem : metaData.entrySet()) {
-
-            StringBuilder stringBuilder = new StringBuilder();
-            for (String dataItem : metaItem.getValue()) {
-                stringBuilder.append(StringUtil.quote(dataItem, ";", '\\')).append(";");
-
-                //in case of save actions, add an additional newline after the enabled flag
-                if (metaItem.getKey().equals(SAVE_ACTIONS) && ("enabled".equals(dataItem) || "disabled".equals(dataItem))) {
-                    stringBuilder.append(OS.NEWLINE);
-                }
-            }
-
-            String serializedItem = stringBuilder.toString();
-            // Only add non-empty values
-            if (!serializedItem.isEmpty() && !";".equals(serializedItem)) {
-                serializedMetaData.put(metaItem.getKey(), serializedItem);
-            }
-        }
-
-        // write groups if present. skip this if only the root node exists
-        // (which is always the AllEntriesGroup).
-        getGroups().filter(groups -> groups.getNumberOfChildren() > 0).ifPresent(groups -> {
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append(OS.NEWLINE);
-
-            for (String groupNode : groups.getTreeAsString()) {
-                stringBuilder.append(StringUtil.quote(groupNode, ";", '\\'));
-                stringBuilder.append(";");
-                stringBuilder.append(OS.NEWLINE);
-            }
-            serializedMetaData.put(GROUPSTREE, stringBuilder.toString());
-        });
-        return serializedMetaData;
+    public Map<String, List<String>> getMetaData() {
+        return new HashMap<>(metaData);
     }
 
-    public void setSaveActions(FieldFormatterCleanups saveActions) {
-        List<String> actionsSerialized = saveActions.getAsStringList();
+    public void setSaveActions(List<String> actionsSerialized) {
         putData(SAVE_ACTIONS, actionsSerialized);
     }
 
@@ -457,6 +328,9 @@ public class MetaData implements Iterable<String> {
         eventBus.post(new MetaDataChangedEvent(this));
     }
 
+    public void postGroupChange() {
+        eventBus.post(new MetaDataChangedEvent(this));
+    }
     /**
      * Returns the encoding used during parsing.
      */

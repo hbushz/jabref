@@ -5,8 +5,8 @@ import java.util.List;
 import javax.swing.Icon;
 import javax.swing.JPanel;
 
-import net.sf.jabref.MetaData;
 import net.sf.jabref.gui.BasePanel;
+import net.sf.jabref.model.MetaData;
 import net.sf.jabref.model.database.BibDatabase;
 import net.sf.jabref.model.entry.BibEntry;
 

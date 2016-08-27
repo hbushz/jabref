@@ -1,6 +1,6 @@
 package net.sf.jabref.event;
 
-import net.sf.jabref.MetaData;
+import net.sf.jabref.model.MetaData;
 
 /**
  * {@link MetaDataChangedEvent} is fired when a tuple of meta data has been put or removed.

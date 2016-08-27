@@ -8,11 +8,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Scanner;
 
-import net.sf.jabref.BibDatabaseContext;
-import net.sf.jabref.Defaults;
-import net.sf.jabref.MetaData;
 import net.sf.jabref.logic.cleanup.FieldFormatterCleanup;
-import net.sf.jabref.logic.config.SaveOrderConfig;
 import net.sf.jabref.logic.formatter.casechanger.LowerCaseFormatter;
 import net.sf.jabref.logic.groups.AllEntriesGroup;
 import net.sf.jabref.logic.groups.ExplicitGroup;
@@ -23,7 +19,11 @@ import net.sf.jabref.logic.importer.ParserResult;
 import net.sf.jabref.logic.importer.fileformat.BibtexParser;
 import net.sf.jabref.logic.importer.fileformat.ImportFormat;
 import net.sf.jabref.logic.util.OS;
+import net.sf.jabref.model.BibDatabaseContext;
+import net.sf.jabref.model.Defaults;
 import net.sf.jabref.model.EntryTypes;
+import net.sf.jabref.model.MetaData;
+import net.sf.jabref.model.SaveOrderConfig;
 import net.sf.jabref.model.bibtexkeypattern.AbstractBibtexKeyPattern;
 import net.sf.jabref.model.bibtexkeypattern.DatabaseBibtexKeyPattern;
 import net.sf.jabref.model.database.BibDatabase;
@@ -406,7 +406,7 @@ public class BibtexDatabaseWriterTest {
     public void writeSaveActions() throws Exception {
         FieldFormatterCleanups saveActions = new FieldFormatterCleanups(true,
                 Collections.singletonList(new FieldFormatterCleanup("title", new LowerCaseFormatter())));
-        metaData.setSaveActions(saveActions);
+        metaData.setSaveActions(saveActions.getAsStringList());
 
         StringSaveSession session = databaseWriter.savePartOfDatabase(bibtexContext, Collections.emptyList(), new SavePreferences());
 

@@ -44,7 +44,6 @@ import javax.swing.undo.AbstractUndoableEdit;
 import javax.swing.undo.CompoundEdit;
 
 import net.sf.jabref.Globals;
-import net.sf.jabref.MetaData;
 import net.sf.jabref.event.GroupUpdatedEvent;
 import net.sf.jabref.gui.BasePanel;
 import net.sf.jabref.gui.IconTheme;
@@ -66,6 +65,7 @@ import net.sf.jabref.logic.search.SearchMatcher;
 import net.sf.jabref.logic.search.matchers.MatcherSet;
 import net.sf.jabref.logic.search.matchers.MatcherSets;
 import net.sf.jabref.logic.search.matchers.NotMatcher;
+import net.sf.jabref.model.MetaData;
 import net.sf.jabref.model.entry.BibEntry;
 import net.sf.jabref.preferences.JabRefPreferences;
 

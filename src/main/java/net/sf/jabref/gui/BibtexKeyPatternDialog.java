@@ -14,10 +14,10 @@ import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
 import net.sf.jabref.Globals;
-import net.sf.jabref.MetaData;
 import net.sf.jabref.gui.bibtexkeypattern.BibtexKeyPatternPanel;
 import net.sf.jabref.gui.keyboard.KeyBinder;
 import net.sf.jabref.logic.l10n.Localization;
+import net.sf.jabref.model.MetaData;
 import net.sf.jabref.model.bibtexkeypattern.AbstractBibtexKeyPattern;
 
 import com.jgoodies.forms.builder.ButtonBarBuilder;

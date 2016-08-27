@@ -3,9 +3,9 @@ package net.sf.jabref.gui.importer;
 import java.io.File;
 import java.io.FileFilter;
 
-import net.sf.jabref.BibDatabaseContext;
 import net.sf.jabref.Globals;
 import net.sf.jabref.logic.util.io.DatabaseFileLookup;
+import net.sf.jabref.model.BibDatabaseContext;
 import net.sf.jabref.model.database.BibDatabase;
 
 /**

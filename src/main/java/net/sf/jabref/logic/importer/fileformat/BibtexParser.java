@@ -14,13 +14,14 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
-import net.sf.jabref.MetaData;
 import net.sf.jabref.logic.bibtex.FieldContentParser;
 import net.sf.jabref.logic.exporter.SavePreferences;
 import net.sf.jabref.logic.importer.ImportFormatPreferences;
 import net.sf.jabref.logic.importer.ParserResult;
+import net.sf.jabref.logic.importer.util.MetaDataParser;
 import net.sf.jabref.logic.importer.util.ParseException;
 import net.sf.jabref.logic.l10n.Localization;
+import net.sf.jabref.model.MetaData;
 import net.sf.jabref.model.database.BibDatabase;
 import net.sf.jabref.model.database.KeyCollisionException;
 import net.sf.jabref.model.entry.BibEntry;
@@ -187,7 +188,7 @@ public class BibtexParser {
 
         // Instantiate meta data:
         try {
-            parserResult.setMetaData(MetaData.parse(meta, importFormatPreferences.getKeywordSeparator()));
+            parserResult.setMetaData(MetaDataParser.parse(meta, importFormatPreferences.getKeywordSeparator()));
         } catch (ParseException exception) {
             parserResult.addWarning(exception.getLocalizedMessage());
         }

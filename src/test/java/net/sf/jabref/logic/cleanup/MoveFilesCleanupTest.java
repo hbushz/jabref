@@ -5,8 +5,8 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Optional;
 
-import net.sf.jabref.BibDatabaseContext;
-import net.sf.jabref.MetaData;
+import net.sf.jabref.model.BibDatabaseContext;
+import net.sf.jabref.model.MetaData;
 import net.sf.jabref.model.database.BibDatabase;
 import net.sf.jabref.model.entry.BibEntry;
 import net.sf.jabref.model.entry.FileField;

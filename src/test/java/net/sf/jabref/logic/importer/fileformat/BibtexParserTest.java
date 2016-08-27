@@ -13,7 +13,6 @@ import java.util.Optional;
 import java.util.Set;
 
 import net.sf.jabref.logic.cleanup.FieldFormatterCleanup;
-import net.sf.jabref.logic.config.SaveOrderConfig;
 import net.sf.jabref.logic.exporter.FieldFormatterCleanups;
 import net.sf.jabref.logic.exporter.SavePreferences;
 import net.sf.jabref.logic.formatter.casechanger.LowerCaseFormatter;
@@ -26,6 +25,7 @@ import net.sf.jabref.logic.importer.ImportFormatPreferences;
 import net.sf.jabref.logic.importer.ParserResult;
 import net.sf.jabref.logic.importer.util.ParseException;
 import net.sf.jabref.logic.util.OS;
+import net.sf.jabref.model.SaveOrderConfig;
 import net.sf.jabref.model.bibtexkeypattern.AbstractBibtexKeyPattern;
 import net.sf.jabref.model.bibtexkeypattern.DatabaseBibtexKeyPattern;
 import net.sf.jabref.model.bibtexkeypattern.GlobalBibtexKeyPattern;
@@ -1407,7 +1407,7 @@ public class BibtexParserTest {
 
         ParserResult parserResult = parser.parse();
 
-        FieldFormatterCleanups saveActions = parserResult.getMetaData().getSaveActions().get();
+        FieldFormatterCleanups saveActions = FieldFormatterCleanups.fromMetaData(parserResult.getMetaData()).get();
 
         assertTrue(saveActions.isEnabled());
         assertEquals(Collections.singletonList(new FieldFormatterCleanup("title", new LowerCaseFormatter())),
@@ -1421,7 +1421,7 @@ public class BibtexParserTest {
                 importFormatPreferences);
 
         ParserResult parserResult = parser.parse();
-        FieldFormatterCleanups saveActions = parserResult.getMetaData().getSaveActions().get();
+        FieldFormatterCleanups saveActions = FieldFormatterCleanups.fromMetaData(parserResult.getMetaData()).get();
 
         assertTrue(saveActions.isEnabled());
         assertEquals(Collections.singletonList(new FieldFormatterCleanup("title", new LowerCaseFormatter())),

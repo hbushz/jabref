@@ -4,9 +4,9 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Collection;
 
-import net.sf.jabref.BibDatabaseContext;
-import net.sf.jabref.Defaults;
 import net.sf.jabref.Globals;
+import net.sf.jabref.model.BibDatabaseContext;
+import net.sf.jabref.model.Defaults;
 import net.sf.jabref.model.database.BibDatabaseMode;
 import net.sf.jabref.model.database.DatabaseLocation;
 import net.sf.jabref.model.entry.BibEntry;

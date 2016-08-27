@@ -65,7 +65,6 @@ import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 
-import net.sf.jabref.BibDatabaseContext;
 import net.sf.jabref.Globals;
 import net.sf.jabref.JabRefExecutorService;
 import net.sf.jabref.JabRefGUI;
@@ -76,6 +75,7 @@ import net.sf.jabref.gui.importer.UnlinkedFilesCrawler;
 import net.sf.jabref.gui.importer.UnlinkedPDFFileFilter;
 import net.sf.jabref.gui.util.GUIUtil;
 import net.sf.jabref.logic.l10n.Localization;
+import net.sf.jabref.model.BibDatabaseContext;
 import net.sf.jabref.model.EntryTypes;
 import net.sf.jabref.model.entry.EntryType;
 import net.sf.jabref.model.entry.FieldName;

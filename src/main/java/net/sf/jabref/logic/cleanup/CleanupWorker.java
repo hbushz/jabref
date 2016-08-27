@@ -5,10 +5,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-import net.sf.jabref.BibDatabaseContext;
-import net.sf.jabref.FileDirectoryPreferences;
 import net.sf.jabref.logic.layout.LayoutFormatterPreferences;
+import net.sf.jabref.model.BibDatabaseContext;
 import net.sf.jabref.model.FieldChange;
+import net.sf.jabref.model.FileDirectoryPreferences;
 import net.sf.jabref.model.entry.BibEntry;
 import net.sf.jabref.model.entry.FieldName;
 

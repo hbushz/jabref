@@ -10,9 +10,9 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import net.sf.jabref.BibDatabaseContext;
 import net.sf.jabref.gui.FindUnlinkedFilesDialog.CheckableTreeNode;
 import net.sf.jabref.gui.FindUnlinkedFilesDialog.FileNodeWrapper;
+import net.sf.jabref.model.BibDatabaseContext;
 import net.sf.jabref.model.database.BibDatabase;
 
 /**

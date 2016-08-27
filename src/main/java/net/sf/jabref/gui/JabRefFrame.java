@@ -56,7 +56,6 @@ import javax.swing.TransferHandler;
 import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 
-import net.sf.jabref.BibDatabaseContext;
 import net.sf.jabref.Globals;
 import net.sf.jabref.JabRefExecutorService;
 import net.sf.jabref.external.ExternalFileTypeEditor;
@@ -116,6 +115,7 @@ import net.sf.jabref.logic.undo.UndoChangeEvent;
 import net.sf.jabref.logic.undo.UndoRedoEvent;
 import net.sf.jabref.logic.util.OS;
 import net.sf.jabref.logic.util.io.FileUtil;
+import net.sf.jabref.model.BibDatabaseContext;
 import net.sf.jabref.model.database.BibDatabaseMode;
 import net.sf.jabref.model.database.DatabaseLocation;
 import net.sf.jabref.model.entry.BibEntry;

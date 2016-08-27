@@ -7,13 +7,15 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
-import net.sf.jabref.BibDatabaseContext;
 import net.sf.jabref.Globals;
-import net.sf.jabref.MetaData;
 import net.sf.jabref.event.MetaDataChangedEvent;
 import net.sf.jabref.event.source.EntryEventSource;
 import net.sf.jabref.logic.exporter.BibDatabaseWriter;
+import net.sf.jabref.logic.exporter.MetaDataSerializer;
+import net.sf.jabref.logic.importer.util.MetaDataParser;
 import net.sf.jabref.logic.importer.util.ParseException;
+import net.sf.jabref.model.BibDatabaseContext;
+import net.sf.jabref.model.MetaData;
 import net.sf.jabref.model.database.BibDatabase;
 import net.sf.jabref.model.entry.BibEntry;
 import net.sf.jabref.model.event.EntryAddedEvent;
@@ -248,7 +250,8 @@ public class DBMSSynchronizer {
         }
 
         try {
-            metaData.setData(dbmsProcessor.getSharedMetaData(), Globals.prefs.get(JabRefPreferences.KEYWORD_SEPARATOR));
+            metaData.setParsedData(MetaDataParser.getParsedData(dbmsProcessor.getSharedMetaData(),
+                    Globals.prefs.get(JabRefPreferences.KEYWORD_SEPARATOR), metaData));
         } catch (ParseException e) {
             LOGGER.error("Parse error", e);
         }
@@ -262,7 +265,7 @@ public class DBMSSynchronizer {
             return;
         }
         try {
-            dbmsProcessor.setSharedMetaData(data.getAsStringMap());
+            dbmsProcessor.setSharedMetaData(MetaDataSerializer.getSerializedStringMap(data));
         } catch (SQLException e) {
             LOGGER.error("SQL Error: ", e);
         }

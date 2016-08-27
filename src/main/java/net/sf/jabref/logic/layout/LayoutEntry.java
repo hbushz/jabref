@@ -10,7 +10,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.regex.Pattern;
 
-import net.sf.jabref.BibDatabaseContext;
 import net.sf.jabref.logic.formatter.bibtexfields.HtmlToLatexFormatter;
 import net.sf.jabref.logic.formatter.bibtexfields.UnicodeToLatexFormatter;
 import net.sf.jabref.logic.layout.format.AuthorAbbreviator;
@@ -78,6 +77,7 @@ import net.sf.jabref.logic.layout.format.XMLChars;
 import net.sf.jabref.logic.openoffice.OOPreFormatter;
 import net.sf.jabref.logic.search.MatchesHighlighter;
 import net.sf.jabref.logic.util.strings.StringUtil;
+import net.sf.jabref.model.BibDatabaseContext;
 import net.sf.jabref.model.database.BibDatabase;
 import net.sf.jabref.model.entry.BibEntry;
 

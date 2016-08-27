@@ -1,4 +1,4 @@
-package net.sf.jabref;
+package net.sf.jabref.model;
 
 import java.util.Map;
 import java.util.Optional;
@@ -9,6 +9,7 @@ public class FileDirectoryPreferences {
     private final String user;
     private final Map<String, String> fieldFileDirectories;
     private final boolean bibLocationAsPrimary;
+    public static final String DIR_SUFFIX = "Directory";
 
 
     public FileDirectoryPreferences(String user, Map<String, String> fieldFileDirectories,

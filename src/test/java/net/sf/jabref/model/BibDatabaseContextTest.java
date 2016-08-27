@@ -1,4 +1,4 @@
-package net.sf.jabref;
+package net.sf.jabref.model;
 
 import net.sf.jabref.model.database.BibDatabase;
 import net.sf.jabref.model.database.BibDatabaseMode;

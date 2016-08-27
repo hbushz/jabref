@@ -5,13 +5,13 @@ import java.io.Writer;
 import java.nio.charset.Charset;
 import java.util.Map;
 
-import net.sf.jabref.BibDatabaseContext;
-import net.sf.jabref.MetaData;
 import net.sf.jabref.logic.bibtex.BibEntryWriter;
 import net.sf.jabref.logic.bibtex.LatexFieldFormatter;
 import net.sf.jabref.logic.bibtex.LatexFieldFormatterPreferences;
 import net.sf.jabref.logic.util.OS;
 import net.sf.jabref.logic.util.strings.StringUtil;
+import net.sf.jabref.model.BibDatabaseContext;
+import net.sf.jabref.model.MetaData;
 import net.sf.jabref.model.database.BibDatabaseMode;
 import net.sf.jabref.model.entry.BibEntry;
 import net.sf.jabref.model.entry.BibtexString;

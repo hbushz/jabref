@@ -8,8 +8,8 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.Optional;
 
-import net.sf.jabref.logic.config.SaveOrderConfig;
 import net.sf.jabref.logic.util.strings.StringUtil;
+import net.sf.jabref.model.SaveOrderConfig;
 import net.sf.jabref.model.entry.AuthorList;
 import net.sf.jabref.model.entry.BibEntry;
 import net.sf.jabref.model.entry.FieldName;

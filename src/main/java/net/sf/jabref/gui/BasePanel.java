@@ -40,7 +40,6 @@ import javax.swing.tree.TreePath;
 import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
 
-import net.sf.jabref.BibDatabaseContext;
 import net.sf.jabref.Globals;
 import net.sf.jabref.JabRefExecutorService;
 import net.sf.jabref.collab.ChangeScanner;
@@ -110,6 +109,7 @@ import net.sf.jabref.logic.util.UpdateField;
 import net.sf.jabref.logic.util.io.FileBasedLock;
 import net.sf.jabref.logic.util.io.FileUtil;
 import net.sf.jabref.logic.util.io.RegExpFileSearch;
+import net.sf.jabref.model.BibDatabaseContext;
 import net.sf.jabref.model.FieldChange;
 import net.sf.jabref.model.database.BibDatabase;
 import net.sf.jabref.model.database.DatabaseLocation;

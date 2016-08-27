@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.StringJoiner;
 
 import net.sf.jabref.logic.cleanup.FieldFormatterCleanup;
@@ -18,6 +19,7 @@ import net.sf.jabref.logic.formatter.bibtexfields.OrdinalsToSuperscriptFormatter
 import net.sf.jabref.logic.util.OS;
 import net.sf.jabref.logic.util.strings.StringUtil;
 import net.sf.jabref.model.FieldChange;
+import net.sf.jabref.model.MetaData;
 import net.sf.jabref.model.entry.BibEntry;
 import net.sf.jabref.model.entry.FieldName;
 
@@ -224,5 +226,9 @@ public class FieldFormatterCleanups {
             return FieldFormatterCleanups.DEFAULT_SAVE_ACTIONS;
         }
 
+    }
+
+    public static Optional<FieldFormatterCleanups> fromMetaData(MetaData metadata) {
+        return metadata.getSaveActions().map(FieldFormatterCleanups::parse);
     }
 }
