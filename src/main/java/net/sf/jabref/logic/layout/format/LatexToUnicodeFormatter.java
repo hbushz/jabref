@@ -8,6 +8,7 @@ import net.sf.jabref.logic.layout.LayoutFormatter;
 import net.sf.jabref.logic.util.OS;
 import net.sf.jabref.logic.util.strings.HTMLUnicodeConversionMaps;
 import net.sf.jabref.logic.util.strings.StringUtil;
+import net.sf.jabref.model.util.ModelStringUtil;
 
 /**
  * This formatter converts LaTeX character sequences their equivalent unicode characters,
@@ -68,7 +69,7 @@ public class LatexToUnicodeFormatter implements LayoutFormatter, Formatter {
             } else if (!incommand && ((c == '{') || (c == '}'))) {
                 // Swallow the brace.
             } else if (Character.isLetter(c) || (c == '%')
-                    || StringUtil.SPECIAL_COMMAND_CHARS.contains(String.valueOf(c))) {
+                    || ModelStringUtil.SPECIAL_COMMAND_CHARS.contains(String.valueOf(c))) {
                 escaped = false;
 
                 if (!incommand) {
@@ -76,7 +77,7 @@ public class LatexToUnicodeFormatter implements LayoutFormatter, Formatter {
                 } else {
                     currentCommand.append(c);
                     if ((currentCommand.length() == 1)
-                            && StringUtil.SPECIAL_COMMAND_CHARS.contains(currentCommand.toString())
+                            && ModelStringUtil.SPECIAL_COMMAND_CHARS.contains(currentCommand.toString())
                             && !(i >= (field.length() - 1))) {
                         // This indicates that we are in a command of the type
                         // \^o or \~{n}

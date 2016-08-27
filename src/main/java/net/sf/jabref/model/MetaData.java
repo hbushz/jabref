@@ -14,12 +14,12 @@ import java.util.Vector;
 
 import net.sf.jabref.event.GroupUpdatedEvent;
 import net.sf.jabref.event.MetaDataChangedEvent;
-import net.sf.jabref.logic.groups.GroupTreeNode;
 import net.sf.jabref.model.bibtexkeypattern.AbstractBibtexKeyPattern;
 import net.sf.jabref.model.bibtexkeypattern.DatabaseBibtexKeyPattern;
 import net.sf.jabref.model.bibtexkeypattern.GlobalBibtexKeyPattern;
 import net.sf.jabref.model.database.BibDatabaseMode;
 import net.sf.jabref.model.entry.FieldName;
+import net.sf.jabref.model.groups.GroupTreeNode;
 
 import com.google.common.eventbus.EventBus;
 

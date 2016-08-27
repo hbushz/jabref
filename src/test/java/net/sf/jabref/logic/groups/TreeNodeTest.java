@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
 
+import net.sf.jabref.model.groups.TreeNode;
+
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

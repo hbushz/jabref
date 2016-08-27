@@ -1,7 +1,7 @@
 package net.sf.jabref.logic.search.rules;
 
-import net.sf.jabref.logic.search.SearchMatcher;
 import net.sf.jabref.model.entry.BibEntry;
+import net.sf.jabref.model.search.SearchMatcher;
 
 /**
  * Mock search rule that returns the values passed. Useful for testing.

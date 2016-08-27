@@ -5,6 +5,7 @@ import java.util.Map;
 import net.sf.jabref.logic.layout.LayoutFormatter;
 import net.sf.jabref.logic.util.strings.HTMLUnicodeConversionMaps;
 import net.sf.jabref.logic.util.strings.StringUtil;
+import net.sf.jabref.model.util.ModelStringUtil;
 
 /**
  * This formatter preprocesses JabRef fields before they are run through the layout of the
@@ -55,7 +56,7 @@ public class OOPreFormatter implements LayoutFormatter {
                 //Swallow braces, necessary for replacing encoded characters
 
             } else if (Character.isLetter(c) || (c == '%')
-                    || StringUtil.SPECIAL_COMMAND_CHARS.contains(String.valueOf(c))) {
+                    || ModelStringUtil.SPECIAL_COMMAND_CHARS.contains(String.valueOf(c))) {
                 escaped = false;
 
                 if (!incommand) {
@@ -63,7 +64,7 @@ public class OOPreFormatter implements LayoutFormatter {
                 } else {
                     currentCommand.append(c);
                     testCharCom: if ((currentCommand.length() == 1)
-                            && StringUtil.SPECIAL_COMMAND_CHARS.contains(currentCommand.toString())) {
+                            && ModelStringUtil.SPECIAL_COMMAND_CHARS.contains(currentCommand.toString())) {
                         // This indicates that we are in a command of the type
                         // \^o or \~{n}
                         if (i >= (finalResult.length() - 1)) {

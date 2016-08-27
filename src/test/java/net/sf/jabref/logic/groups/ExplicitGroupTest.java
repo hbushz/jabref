@@ -1,9 +1,11 @@
 package net.sf.jabref.logic.groups;
 
-import net.sf.jabref.logic.importer.util.ParseException;
+import net.sf.jabref.model.ParseException;
 import net.sf.jabref.model.entry.BibEntry;
 import net.sf.jabref.model.entry.BibtexEntryTypes;
 import net.sf.jabref.model.entry.IdGenerator;
+import net.sf.jabref.model.groups.ExplicitGroup;
+import net.sf.jabref.model.groups.GroupHierarchyType;
 import net.sf.jabref.preferences.JabRefPreferences;
 
 import org.junit.Test;

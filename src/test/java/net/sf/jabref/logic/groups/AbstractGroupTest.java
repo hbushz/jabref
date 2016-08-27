@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.sf.jabref.model.entry.BibEntry;
+import net.sf.jabref.model.groups.AbstractGroup;
 
 import org.junit.Before;
 import org.mockito.Mockito;

@@ -5,10 +5,17 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import net.sf.jabref.logic.importer.util.ParseException;
-import net.sf.jabref.logic.search.matchers.AndMatcher;
-import net.sf.jabref.logic.search.matchers.OrMatcher;
+import net.sf.jabref.model.ParseException;
 import net.sf.jabref.model.entry.BibEntry;
+import net.sf.jabref.model.groups.AbstractGroup;
+import net.sf.jabref.model.groups.AllEntriesGroup;
+import net.sf.jabref.model.groups.ExplicitGroup;
+import net.sf.jabref.model.groups.GroupHierarchyType;
+import net.sf.jabref.model.groups.GroupTreeNode;
+import net.sf.jabref.model.groups.KeywordGroup;
+import net.sf.jabref.model.groups.SearchGroup;
+import net.sf.jabref.model.search.matchers.AndMatcher;
+import net.sf.jabref.model.search.matchers.OrMatcher;
 import net.sf.jabref.preferences.JabRefPreferences;
 
 import org.junit.Before;

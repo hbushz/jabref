@@ -4,6 +4,7 @@ import net.sf.jabref.model.entry.BibEntry;
 import net.sf.jabref.model.entry.BibtexEntryTypes;
 import net.sf.jabref.model.entry.FieldName;
 import net.sf.jabref.model.entry.IdGenerator;
+import net.sf.jabref.model.search.SearchQuery;
 
 import org.junit.Test;
 

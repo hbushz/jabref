@@ -33,16 +33,16 @@ import net.sf.jabref.gui.FieldContentSelector;
 import net.sf.jabref.gui.JabRefFrame;
 import net.sf.jabref.gui.fieldeditors.TextField;
 import net.sf.jabref.gui.keyboard.KeyBinding;
-import net.sf.jabref.logic.groups.AbstractGroup;
-import net.sf.jabref.logic.groups.ExplicitGroup;
-import net.sf.jabref.logic.groups.GroupHierarchyType;
-import net.sf.jabref.logic.groups.KeywordGroup;
-import net.sf.jabref.logic.groups.SearchGroup;
-import net.sf.jabref.logic.importer.util.ParseException;
 import net.sf.jabref.logic.l10n.Localization;
-import net.sf.jabref.logic.search.SearchQuery;
-import net.sf.jabref.logic.util.strings.StringUtil;
+import net.sf.jabref.model.ParseException;
 import net.sf.jabref.model.entry.FieldName;
+import net.sf.jabref.model.groups.AbstractGroup;
+import net.sf.jabref.model.groups.ExplicitGroup;
+import net.sf.jabref.model.groups.GroupHierarchyType;
+import net.sf.jabref.model.groups.KeywordGroup;
+import net.sf.jabref.model.groups.SearchGroup;
+import net.sf.jabref.model.search.SearchQuery;
+import net.sf.jabref.model.util.ModelStringUtil;
 import net.sf.jabref.preferences.JabRefPreferences;
 
 import com.jgoodies.forms.builder.ButtonBarBuilder;
@@ -431,11 +431,11 @@ class GroupDialog extends JDialog {
             if (i > 0) {
                 sb.append("<br>");
             }
-            sb.append(StringUtil.quoteForHTML(sa[i]));
+            sb.append(ModelStringUtil.quoteForHTML(sa[i]));
         }
         String s = Localization.lang(
                 "The regular expression <b>%0</b> is invalid:",
-                StringUtil.quoteForHTML(regExp))
+                ModelStringUtil.quoteForHTML(regExp))
                 + "<p><tt>"
                 + sb
                 + "</tt>";

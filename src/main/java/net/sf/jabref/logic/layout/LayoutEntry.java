@@ -62,7 +62,7 @@ import net.sf.jabref.logic.layout.format.Ordinal;
 import net.sf.jabref.logic.layout.format.RTFChars;
 import net.sf.jabref.logic.layout.format.RemoveBrackets;
 import net.sf.jabref.logic.layout.format.RemoveBracketsAddComma;
-import net.sf.jabref.logic.layout.format.RemoveLatexCommands;
+import net.sf.jabref.logic.layout.format.RemoveLatexCommandsFormatter;
 import net.sf.jabref.logic.layout.format.RemoveTilde;
 import net.sf.jabref.logic.layout.format.RemoveWhitespace;
 import net.sf.jabref.logic.layout.format.Replace;
@@ -80,7 +80,6 @@ import net.sf.jabref.logic.util.strings.StringUtil;
 import net.sf.jabref.model.BibDatabaseContext;
 import net.sf.jabref.model.database.BibDatabase;
 import net.sf.jabref.model.entry.BibEntry;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -510,7 +509,7 @@ class LayoutEntry {
         case "RemoveBracketsAddComma":
             return new RemoveBracketsAddComma();
         case "RemoveLatexCommands":
-            return new RemoveLatexCommands();
+            return new RemoveLatexCommandsFormatter();
         case "RemoveTilde":
             return new RemoveTilde();
         case "RemoveWhitespace":

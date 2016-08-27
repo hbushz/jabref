@@ -5,8 +5,8 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import net.sf.jabref.logic.util.OS;
-import net.sf.jabref.logic.util.strings.StringUtil;
 import net.sf.jabref.model.MetaData;
+import net.sf.jabref.model.util.ModelStringUtil;
 
 public class MetaDataSerializer {
 
@@ -22,7 +22,7 @@ public class MetaDataSerializer {
     
             StringBuilder stringBuilder = new StringBuilder();
             for (String dataItem : metaItem.getValue()) {
-                stringBuilder.append(StringUtil.quote(dataItem, ";", '\\')).append(";");
+                stringBuilder.append(ModelStringUtil.quote(dataItem, ";", '\\')).append(";");
     
                 //in case of save actions, add an additional newline after the enabled flag
                 if (metaItem.getKey().equals(MetaData.SAVE_ACTIONS)
@@ -45,7 +45,7 @@ public class MetaDataSerializer {
             stringBuilder.append(OS.NEWLINE);
     
             for (String groupNode : groups.getTreeAsString()) {
-                stringBuilder.append(StringUtil.quote(groupNode, ";", '\\'));
+                stringBuilder.append(ModelStringUtil.quote(groupNode, ";", '\\'));
                 stringBuilder.append(";");
                 stringBuilder.append(OS.NEWLINE);
             }

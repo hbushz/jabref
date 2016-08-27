@@ -10,9 +10,9 @@ import javax.swing.SwingWorker;
 
 import net.sf.jabref.gui.BasePanel;
 import net.sf.jabref.gui.maintable.MainTableDataModel;
-import net.sf.jabref.logic.search.SearchQuery;
 import net.sf.jabref.model.database.BibDatabase;
 import net.sf.jabref.model.entry.BibEntry;
+import net.sf.jabref.model.search.SearchQuery;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
