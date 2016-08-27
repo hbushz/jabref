@@ -6,7 +6,7 @@ import net.sf.jabref.model.search.RemoveLatexCommands;
 
 public class RemoveLatexCommandsFormatter implements LayoutFormatter {
 
-    RemoveLatexCommands removeFormatter = new RemoveLatexCommands();
+    private final RemoveLatexCommands removeFormatter = new RemoveLatexCommands();
 
     @Override
     public String format(String fieldText) {

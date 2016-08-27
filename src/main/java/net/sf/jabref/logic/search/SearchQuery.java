@@ -1,15 +1,16 @@
-package net.sf.jabref.model.search;
+package net.sf.jabref.logic.search;
 
 import java.util.Objects;
 
 import net.sf.jabref.logic.l10n.Localization;
+import net.sf.jabref.logic.search.rules.describer.SearchDescriber;
+import net.sf.jabref.logic.search.rules.describer.SearchDescribers;
 import net.sf.jabref.model.entry.BibEntry;
+import net.sf.jabref.model.search.SearchMatcher;
 import net.sf.jabref.model.search.rules.ContainBasedSearchRule;
 import net.sf.jabref.model.search.rules.GrammarBasedSearchRule;
 import net.sf.jabref.model.search.rules.SearchRule;
 import net.sf.jabref.model.search.rules.SearchRules;
-import net.sf.jabref.model.search.rules.describer.SearchDescriber;
-import net.sf.jabref.model.search.rules.describer.SearchDescribers;
 
 public class SearchQuery implements SearchMatcher {
 

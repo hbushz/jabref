@@ -2,8 +2,6 @@ package net.sf.jabref.logic.search;
 
 import java.util.Optional;
 
-import net.sf.jabref.model.search.SearchQuery;
-
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

@@ -8,8 +8,8 @@ import net.sf.jabref.gui.BasePanel;
 import net.sf.jabref.gui.JabRefFrame;
 import net.sf.jabref.gui.worker.AbstractWorker;
 import net.sf.jabref.logic.l10n.Localization;
+import net.sf.jabref.logic.search.SearchQuery;
 import net.sf.jabref.model.entry.BibEntry;
-import net.sf.jabref.model.search.SearchQuery;
 
 class GlobalSearchWorker extends AbstractWorker {
 

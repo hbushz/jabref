@@ -6,7 +6,7 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
 
-import net.sf.jabref.logic.l10n.Localization;
+import net.sf.jabref.logic.groups.GroupDescriptions;
 import net.sf.jabref.model.ParseException;
 import net.sf.jabref.model.entry.FieldName;
 import net.sf.jabref.model.util.ModelStringUtil;
@@ -121,32 +121,12 @@ public class ExplicitGroup extends KeywordGroup {
 
     @Override
     public String getDescription() {
-        return ExplicitGroup.getDescriptionForPreview();
-    }
-
-    public static String getDescriptionForPreview() {
-        return Localization.lang("This group contains entries based on manual assignment. "
-                + "Entries can be assigned to this group by selecting them "
-                + "then using either drag and drop or the context menu. "
-                + "Entries can be removed from this group by selecting them "
-                + "then using the context menu.");
+        return GroupDescriptions.getDescriptionForPreview();
     }
 
     @Override
     public String getShortDescription(boolean showDynamic) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("<b>").append(getName()).append("</b> -").append(Localization.lang("static group"));
-        switch (getHierarchicalContext()) {
-        case INCLUDING:
-            sb.append(", ").append(Localization.lang("includes subgroups"));
-            break;
-        case REFINING:
-            sb.append(", ").append(Localization.lang("refines supergroup"));
-            break;
-        default:
-            break;
-        }
-        return sb.toString();
+        return GroupDescriptions.getShortDescription(this, showDynamic);
     }
 
     public List<String> getLegacyEntryKeys() {

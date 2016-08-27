@@ -3,10 +3,11 @@ package net.sf.jabref.model.groups;
 import java.util.List;
 import java.util.Optional;
 
-import net.sf.jabref.logic.l10n.Localization;
+import net.sf.jabref.logic.groups.GroupDescriptions;
+import net.sf.jabref.model.search.GroupSearchQuery;
+import net.sf.jabref.model.search.rules.SearchRule;
 import net.sf.jabref.model.EntriesGroupChange;
 import net.sf.jabref.model.entry.BibEntry;
-import net.sf.jabref.model.search.SearchQuery;
 import net.sf.jabref.model.util.ModelStringUtil;
 
 import org.apache.commons.logging.Log;
@@ -21,9 +22,14 @@ public class SearchGroup extends AbstractGroup {
 
     public static final String ID = "SearchGroup:";
 
-    private final SearchQuery query;
+    private final GroupSearchQuery query;
 
     private static final Log LOGGER = LogFactory.getLog(SearchGroup.class);
+
+    private final String searchExpression;
+    private final boolean caseSensitive;
+    private final boolean regExp;
+
 
     /**
      * Creates a SearchGroup with the specified properties.
@@ -32,7 +38,10 @@ public class SearchGroup extends AbstractGroup {
             GroupHierarchyType context) {
         super(name, context);
 
-        this.query = new SearchQuery(searchExpression, caseSensitive, regExp);
+        this.searchExpression = searchExpression;
+        this.caseSensitive = caseSensitive;
+        this.regExp = regExp;
+        this.query = new GroupSearchQuery(searchExpression, caseSensitive, regExp);
     }
 
     /**
@@ -79,7 +88,7 @@ public class SearchGroup extends AbstractGroup {
     }
 
     public String getSearchExpression() {
-        return this.query.getQuery();
+        return searchExpression;
     }
 
     @Override
@@ -138,11 +147,11 @@ public class SearchGroup extends AbstractGroup {
     }
 
     public boolean isCaseSensitive() {
-        return this.query.isCaseSensitive();
+        return caseSensitive;
     }
 
     public boolean isRegExp() {
-        return this.query.isRegularExpression();
+        return regExp;
     }
 
     @Override
@@ -152,41 +161,22 @@ public class SearchGroup extends AbstractGroup {
 
     @Override
     public String getDescription() {
-        return this.query.getDescription();
+        return GroupDescriptions.getDescriptionSearchGroup(this);
     }
 
     @Override
     public String getShortDescription(boolean showDynamic) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("<b>");
-        if (showDynamic) {
-            sb.append("<i>").append(ModelStringUtil.quoteForHTML(getName())).append("</i>");
-        } else {
-            sb.append(ModelStringUtil.quoteForHTML(getName()));
-        }
-        sb.append("</b> - ");
-        sb.append(Localization.lang("dynamic group"));
-        sb.append(" (");
-        sb.append(Localization.lang("search expression"));
-        sb.append(" <b>").
-                append(ModelStringUtil.quoteForHTML(getSearchExpression())).append("</b>)");
-        switch (getHierarchicalContext()) {
-        case INCLUDING:
-            sb.append(", ").append(Localization.lang("includes subgroups"));
-            break;
-        case REFINING:
-            sb.append(", ").append(Localization.lang("refines supergroup"));
-            break;
-        default:
-            break;
-        }
-        return sb.toString();
+        return GroupDescriptions.getShortDescription(this, showDynamic);
     }
 
     @Override
     public int hashCode() {
         // TODO Auto-generated method stub
         return super.hashCode();
+    }
+
+    public SearchRule getSearchRule() {
+        return query.getRule();
     }
 
 }

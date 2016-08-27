@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 import net.sf.jabref.model.database.BibDatabase;
 import net.sf.jabref.model.database.BibDatabases;
 import net.sf.jabref.model.entry.BibEntry;
-import net.sf.jabref.model.search.SearchQuery;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

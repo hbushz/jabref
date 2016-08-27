@@ -1,6 +1,6 @@
 package net.sf.jabref.logic.search;
 
-import net.sf.jabref.model.search.rules.describer.ContainsAndRegexBasedSearchRuleDescriber;
+import net.sf.jabref.logic.search.rules.describer.ContainsAndRegexBasedSearchRuleDescriber;
 
 import org.junit.Test;
 

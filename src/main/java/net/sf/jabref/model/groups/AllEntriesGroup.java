@@ -3,6 +3,7 @@ package net.sf.jabref.model.groups;
 import java.util.List;
 import java.util.Optional;
 
+import net.sf.jabref.logic.groups.GroupDescriptions;
 import net.sf.jabref.logic.l10n.Localization;
 import net.sf.jabref.model.EntriesGroupChange;
 import net.sf.jabref.model.entry.BibEntry;
@@ -75,12 +76,12 @@ public class AllEntriesGroup extends AbstractGroup {
 
     @Override
     public String getDescription() {
-        return Localization.lang("This group contains all entries. It cannot be edited or removed.");
+        return GroupDescriptions.getDescriptionAllEntriesGroup();
     }
 
     @Override
     public String getShortDescription(boolean showDynamic) {
-        return Localization.lang("<b>All Entries</b> (this group cannot be edited or removed)");
+        return GroupDescriptions.getShortDescriptionAllEntriesGroup();
     }
 
     @Override

@@ -16,6 +16,7 @@ import net.sf.jabref.logic.importer.ParserResult;
 import net.sf.jabref.logic.importer.fileformat.BibtexParser;
 import net.sf.jabref.logic.layout.format.HTMLChars;
 import net.sf.jabref.logic.layout.format.LatexToUnicodeFormatter;
+import net.sf.jabref.logic.search.SearchQuery;
 import net.sf.jabref.model.BibDatabaseContext;
 import net.sf.jabref.model.Defaults;
 import net.sf.jabref.model.MetaData;
@@ -26,7 +27,6 @@ import net.sf.jabref.model.database.BibDatabaseModeDetection;
 import net.sf.jabref.model.entry.BibEntry;
 import net.sf.jabref.model.groups.GroupHierarchyType;
 import net.sf.jabref.model.groups.KeywordGroup;
-import net.sf.jabref.model.search.SearchQuery;
 import net.sf.jabref.preferences.JabRefPreferences;
 
 import org.openjdk.jmh.Main;

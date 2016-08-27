@@ -1,4 +1,4 @@
-package net.sf.jabref.model.search.rules.describer;
+package net.sf.jabref.logic.search.rules.describer;
 
 import net.sf.jabref.model.search.rules.ContainBasedSearchRule;
 import net.sf.jabref.model.search.rules.GrammarBasedSearchRule;
